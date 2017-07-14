@@ -3,7 +3,9 @@ package com.example.abhijeetsingh.task41;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.github.kittinunf.fuel.Fuel;
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity  {
     private TextView emailText;
     String s =new String();
     private Button b;
-    ArrayList<User> users=new ArrayList<User>();
+    ArrayList<User> users =new ArrayList<User>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,13 +46,14 @@ public class MainActivity extends AppCompatActivity  {
                            Gson g=new Gson();
                            Type type = new TypeToken<ArrayList<User>>() {}.getType();
                            users = g.fromJson(s ,type);
-                           for(int j = 0;j<users.size();j++)
-                           {
-                              User user=users.get(j);
-                               nameText.setText("name is:"+user.getName()+" email is"+user.getemailaddress());
+                        UserAdapter itemsAdapter=new UserAdapter(this,users);
+                        ListView l =(ListView)findViewById(R.id.listView);
+                        l.setAdapter(itemsAdapter);
 
 
-                           }
+
+
+
 
 
 
